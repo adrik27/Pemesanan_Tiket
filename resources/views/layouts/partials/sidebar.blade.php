@@ -28,6 +28,11 @@
         <div id="two-column-menu">
         </div>
         <ul class="navbar-nav" id="navbar-nav">
+            <li class="nav-item">
+                <a href="/Dashboard/Konser" class="nav-link {{ Request::is('Dashboard/Konser*')?'active':'' }}"><i
+                        class="ri-check-double-fill"></i>Daftar Konser
+                </a>
+            </li> <!-- end Dashboard Menu -->
             @can('admin')
             <li class="menu-title"><span data-key="t-menu">Menu Admin</span></li>
             <li class="nav-item">
@@ -40,6 +45,8 @@
                         class="ri-check-double-fill"></i> Check In
                 </a>
             </li> <!-- end Dashboard Menu -->
+            @endcan
+            @can('user')
             <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Pages</span></li>
 
             <li class="nav-item">
@@ -50,12 +57,6 @@
             </li>
 
             @endcan
-            <li class="nav-item">
-                <a href="/Dashboard/User" class="nav-link {{ Request::is('Dashboard/User*')?'active':'' }}"><i
-                        class="ri-check-double-fill"></i>Daftar Konser
-                </a>
-            </li> <!-- end Dashboard Menu -->
-
 
 
         </ul>
