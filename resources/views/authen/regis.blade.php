@@ -14,31 +14,32 @@
                             <h5 class="text-primary">SIGN UP</h5>
                         </div>
                         <div class="p-2 mt-4">
-                            <form action="/registrasi" method="post">
+                            <form action="/registrasi" method="post" enctype="multipart/form-data">
                                 @csrf
 
-                                {{-- <div class="mb-3">
-                                    <input type="hidden" name="role" class="form-control" id="role"
-                                        placeholder="Enter Role">
-                                </div> --}}
+                                <div class="mb-3">
+                                    <label for="image" class="form-label">Image</label>
+                                    <input type="file" name="image" class="form-control" id="image" autocomplete="off">
+                                </div>
 
                                 <div class="mb-3">
                                     <label for="nama" class="form-label">Nama</label>
                                     <input type="text" name="nama" class="form-control" id="nama"
-                                        placeholder="Enter Nama">
+                                        placeholder="Enter Nama" autocomplete="off" autofocus required>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="username" class="form-label">Username</label>
                                     <input type="text" name="username" class="form-control" id="username"
-                                        placeholder="Enter username">
+                                        placeholder="Enter Username" autocomplete="off" required>
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label" for="password-input">Password</label>
                                     <div class="position-relative auth-pass-inputgroup mb-3">
                                         <input type="password" name="password" class="form-control pe-5"
-                                            placeholder="Enter password" id="password-input">
+                                            placeholder="Enter password" id="password-input" autocomplete="off"
+                                            required>
                                         <button
                                             class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted"
                                             type="button" id="password-addon"><i
@@ -57,8 +58,8 @@
                 <!-- end card -->
 
                 <div class="mt-4 text-center">
-                    <p class="mb-0">Tidak memiliki akun ? <a href="/registrasi"
-                            class="fw-semibold text-primary text-decoration-underline"> Signup </a> </p>
+                    <p class="mb-0">Sudah memiliki akun ? <a href="/login"
+                            class="fw-semibold text-primary text-decoration-underline"> Sign In </a> </p>
                 </div>
 
             </div>

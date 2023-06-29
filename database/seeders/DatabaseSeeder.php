@@ -27,21 +27,11 @@ class DatabaseSeeder extends Seeder
             'username'  => 'Admin',
             'password'  => 'Admin'
         ]);
-        User::create([
-            'nama'      => 'User',
-            'role'      => '2',
-            'username'  => 'User',
-            'password'  => 'User'
-        ]);
-
-        Status::create([
-            'nama'  => 'Pesan'
-        ]);
-        Status::create([
-            'nama'  => 'Konfirmasi'
-        ]);
-        Status::create([
-            'nama'  => 'Selesai'
-        ]);
+        // User::create([
+        //     'nama'      => 'User',
+        //     'role'      => '2',
+        //     'username'  => 'User',
+        //     'password'  => 'User'
+        // ]);
     }
 }

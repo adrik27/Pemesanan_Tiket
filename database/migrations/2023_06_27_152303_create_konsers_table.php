@@ -13,9 +13,15 @@ return new class extends Migration
     {
         Schema::create('konsers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('Status_id');
+            $table->string('status');
+            $table->string('image')->nullable();
             $table->string('nama');
+            $table->text('deskripsi');
+            $table->string('harga');
+            $table->integer('kuota');
+            $table->integer('sisakuota');
             $table->string('tempat');
+            $table->string('tanggal');
             $table->timestamps();
         });
     }

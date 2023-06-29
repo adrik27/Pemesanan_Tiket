@@ -15,23 +15,23 @@ class RegistrasiController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi data yang diterima dari request
-        $validatedData = $request->validate([
+        $rule = [
             'nama' => 'required',
             'username' => 'required',
             'password' => 'required',
-        ]);
+        ];
+        // Validasi data yang diterima dari request
+        $validatedData = $request->validate($rule);
 
-        // Buat objek User baru
-        $user = new User();
+        // membuatkan folder untuk image
+        if ($request->file('image')) {
+            $validatedData['image'] = $request->file('image')->store('profil-images');
+        }
+        // mengisi role berisi 2(User)
+        $validatedData['role'] = 2;
 
-        $user->role = 2;
-        $user->nama = $validatedData['nama'];
-        $user->username = $validatedData['username'];
-        $user->password = Hash::make($validatedData['password']);
-
-        // Simpan data ke dalam database
-        $user->save();
+        // Simpan data ke dalam database 
+        User::create($validatedData);
 
         // Berikan respon atau arahkan ke halaman yang diinginkan
         return redirect('/login');

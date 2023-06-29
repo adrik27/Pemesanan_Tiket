@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Tiket;
 use App\Models\Konser;
+use App\Models\Pembayaran;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class KonserController extends Controller
 {
@@ -13,7 +18,7 @@ class KonserController extends Controller
     public function index()
     {
         return view('Dashboard.Konser.index', [
-            'konser'    =>  Konser::all()
+            'konser'    =>  Konser::latest()->paginate(5)->withQueryString()
         ]);
     }
 
@@ -30,20 +35,27 @@ class KonserController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $rule = [
             'Status_id' => 'required',
             'nama' => 'required',
+            'deskripsi' => 'required',
+            'harga' => 'required',
+            'kuota' => 'required',
+            'sisakuota' => 'required',
             'tempat' => 'required',
-        ]);
+            'tanggal' => 'required|date',
+        ];
+        $validatedData = $request->validate($rule);
 
-        // Buat objek User baru
-        $konser = new Konser();
-        $konser->nama = $validatedData['nama'];
-        $konser->tempat = $validatedData['tempat'];
-        $konser->Status_id = 1;
+        if ($request->file('image')) {
+            $validatedData['image']    =   $request->file('image')->store('konser-images');
+        }
+
+        $validatedData['status']    =   'Pesan';
 
         // Simpan data ke dalam database
-        $konser->save();
+        Konser::create($validatedData);
+        // $konser->save();
 
         // Berikan respon atau arahkan ke halaman yang diinginkan
         return redirect('/Dashboard/Konser')->with('success', 'Tambah Data Konser Berhasil Disimpan !');
@@ -54,7 +66,9 @@ class KonserController extends Controller
      */
     public function show(Konser $Konser)
     {
-        //
+        return view('Dashboard.Konser.detail', [
+            'ks'    =>  $Konser,
+        ]);
     }
 
     /**
@@ -78,13 +92,40 @@ class KonserController extends Controller
      */
     public function destroy(Konser $Konser)
     {
+        if ($Konser->image) {
+            Storage::delete($Konser->image);
+        }
+
         Konser::destroy($Konser->id);
 
         return redirect('/Dashboard/Konser');
     }
 
-    public function prosespesan()
+    public function tampilbayar()
     {
-        // 
+        return view('Dashboard.Pembayaran.index');
+    }
+
+    public function prosespesan(Request $request)
+    {
+        $user = User::where('username', Auth()->user()->username)->first();
+
+        $konser = Konser::where('id', $request->Konser_id)->first();
+
+        $data = [
+            'kode_tiket' => substr($konser->nama, 0, 2) . '-' . rand(10000000, 99999999),
+            'nama_konser' => $konser->nama,
+            'tempat_konser' => $konser->tempat,
+            'tgl_konser' => $konser->tanggal,
+            'username' => $user->username,
+            'Status' => 'Non Active',
+        ];
+
+
+        Tiket::create($data);
+
+        Konser::where('id', $request->Konser_id)->decrement('kuota', 1, ['sisakuota' => DB::raw('GREATEST(kuota - 1, 0)')]);
+
+        return redirect('/Pembayaran');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DashAdmin;
+use App\Models\Tiket;
 use Illuminate\Http\Request;
 
 class DashAdminController extends Controller
@@ -10,9 +11,12 @@ class DashAdminController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('Dashboard.Admin.index');
+        $query = $request->input('query');
+        return view('Dashboard.Admin.index', [
+            'tiket' => Tiket::where('kode_tiket', 'LIKE', "%$query%")->paginate(5)->withQueryString()
+        ]);
     }
 
     /**
@@ -61,5 +65,14 @@ class DashAdminController extends Controller
     public function destroy(DashAdmin $dashAdmin)
     {
         //
+    }
+
+    public function proseskonfirmasi(Request $request)
+    {
+
+
+        Tiket::where('id', $request->id)->update(['Status' => 'Active']);
+
+        return redirect('/Dashboard/Admin')->with('success', 'Konfirmasi Sukses');
     }
 }

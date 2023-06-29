@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('tempat');
-            $table->string('status');
+            $table->foreignId('User_id');
+            $table->foreignId('Konser_id');
+            $table->foreignId('Status_id');
             $table->timestamps();
         });
     }

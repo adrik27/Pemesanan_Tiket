@@ -189,10 +189,11 @@
         <!-- start features -->
         <section class="section">
             <div class="container">
-                <div class="row align-items-center gy-4">
-                    <div class="col-lg-6 order-2 order-lg-1">
+                @foreach ($isi as $is)
+                <div class="row align-items-center gy-4 mt-4 ">
+                    <div class="col-lg-6 order-2 order-lg-2 ">
                         <div class="text-muted">
-                            <h1 class="fs-24 text-uppercase text-success">Konser Pop</h1>
+                            <h1 class="fs-24 text-uppercase text-success">KONSER {{ strtoupper($is->nama) }}</h1>
                             <p class="mb-4 ff-secondary">Konser musik pop merupakan salah satu jenis konser yang paling
                                 populer di Indonesia. Konser ini biasanya menampilkan
                                 artis dan grup musik pop terkenal baik dari dalam negeri maupun mancanegara. Konser pop
@@ -201,15 +202,16 @@
                         </div>
                     </div>
                     <!-- end col -->
-                    <div class="col-lg-6 col-sm-7 col-10 ms-auto order-1 order-lg-2">
+                    <div class="col-lg-6 col-sm-7 col-10 ms-auto order-1 order-lg-1">
                         <div>
-                            <img src="{{ url('assets/images/demos/hero1.jpg') }}" alt="" class="img-fluid">
+                            <img src="{{ asset('storage/'.$is->image) }}" alt="" class="img-fluid">
                         </div>
                     </div>
                 </div>
+                @endforeach
                 <!-- end row -->
 
-                <div class="row align-items-center mt-5 pt-lg-5 gy-4">
+                {{-- <div class="row align-items-center mt-5 pt-lg-5 gy-4">
                     <div class="col-lg-6 col-sm-7 col-10 mx-auto">
                         <div>
                             <img src="{{ url('assets/images/demos/hero2.jpg') }}" alt="" class="img-fluid">
@@ -226,10 +228,10 @@
                         </div>
                     </div>
                     <!-- end col -->
-                </div>
+                </div> --}}
                 <!-- end row -->
 
-                <div class="row align-items-center mt-5 pt-lg-5 gy-4">
+                {{-- <div class="row align-items-center mt-5 pt-lg-5 gy-4">
                     <div class="col-lg-6 order-2 order-lg-1">
                         <div class="text-muted">
                             <h1 class="fs-24 text-uppercase text-success">Konser Jazz</h1>
@@ -246,7 +248,7 @@
                             <img src="{{ url('assets/images/demos/hero3.jpg') }}" alt="" class="img-fluid">
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <!-- end row -->
             </div>
             <!-- end container -->

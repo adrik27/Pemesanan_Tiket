@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Konser;
-use App\Models\Portal;
+use App\Models\Tiket;
 use Illuminate\Http\Request;
 
-class PortalController extends Controller
+class TiketController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('Portal.index', [
-            'isi'   =>  Konser::all()
+        return view('Dashboard.Tiket.index', [
+            'tiket' => Tiket::where('username', Auth()->user()->username)->paginate(5)->withQueryString()
         ]);
     }
 
@@ -37,7 +36,7 @@ class PortalController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Portal $portal)
+    public function show(Tiket $tiket)
     {
         //
     }
@@ -45,7 +44,7 @@ class PortalController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Portal $portal)
+    public function edit(Tiket $tiket)
     {
         //
     }
@@ -53,7 +52,7 @@ class PortalController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Portal $portal)
+    public function update(Request $request, Tiket $tiket)
     {
         //
     }
@@ -61,7 +60,7 @@ class PortalController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Portal $portal)
+    public function destroy(Tiket $tiket)
     {
         //
     }

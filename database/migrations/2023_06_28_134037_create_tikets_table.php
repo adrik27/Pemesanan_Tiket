@@ -11,8 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('portals', function (Blueprint $table) {
+        Schema::create('tikets', function (Blueprint $table) {
             $table->id();
+            $table->string('kode_tiket');
+            $table->string('nama_konser');
+            $table->string('tempat_konser');
+            $table->string('tgl_konser');
+            $table->string('username');
+            $table->string('Status');
             $table->timestamps();
         });
     }
@@ -22,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('portals');
+        Schema::dropIfExists('tikets');
     }
 };

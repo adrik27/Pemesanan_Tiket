@@ -20,14 +20,15 @@
                                 <div class="mb-3">
                                     <label for="username" class="form-label">Username</label>
                                     <input type="text" name="username" class="form-control" id="username"
-                                        placeholder="Enter username">
+                                        placeholder="Enter username" required autocomplete="off" autofocus>
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label" for="password-input">Password</label>
                                     <div class="position-relative auth-pass-inputgroup mb-3">
                                         <input type="password" name="password" class="form-control pe-5"
-                                            placeholder="Enter password" id="password-input">
+                                            placeholder="Enter password" id="password-input" autocomplete="off"
+                                            required>
                                         <button
                                             class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted"
                                             type="button" id="password-addon"><i
@@ -47,7 +48,7 @@
 
                 <div class="mt-4 text-center">
                     <p class="mb-0">Tidak memiliki akun ? <a href="/registrasi"
-                            class="fw-semibold text-primary text-decoration-underline"> Signup </a> </p>
+                            class="fw-semibold text-primary text-decoration-underline"> Sign Up </a> </p>
                 </div>
 
             </div>

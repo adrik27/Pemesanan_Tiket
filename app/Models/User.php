@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Konser;
+use App\Models\Pembayaran;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -53,5 +54,10 @@ class User extends Authenticatable
     public function Konser()
     {
         return $this->hasMany(Konser::class);
+    }
+
+    public function Pembayaran()
+    {
+        return $this->hasMany(Pembayaran::class, 'User_id');
     }
 }

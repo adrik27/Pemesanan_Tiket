@@ -9,6 +9,7 @@ use App\Http\Controllers\DashAdminController;
 use App\Http\Controllers\KonserController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\RegistrasiController;
+use App\Http\Controllers\TiketController;
 use App\Models\DashAdmin;
 
 /*
@@ -23,14 +24,23 @@ use App\Models\DashAdmin;
 */
 // PORTAL
 Route::resource('/', PortalController::class);
+// CARI KODE TIKET
+Route::get('/Dashboard/Admin', [DashAdminController::class, 'index']);
 // ADMIN
-Route::resource('/Dashboard/Admin', DashAdminController::class)->middleware('admin');
-Route::resource('/Dashboard/CheckIn', CheckInController::class)->middleware('admin');
-// USER
-route::resource('/Dashboard/User', PembayaranController::class)->middleware('user');
+Route::resource('/Dashboard/Admin', DashAdminController::class);
+Route::post('/Dashboard/konfirmasi', [DashAdminController::class, 'proseskonfirmasi']);
+Route::resource('/Dashboard/CheckIn', CheckInController::class);
+
 // KONSER
 route::resource('/Dashboard/Konser', KonserController::class);
-route::get('/Dashboard/Konser/{Konser:id}', [KonserController::class, 'prosespesan']);
+
+route::post('/Dashboard/Pembayaran', [KonserController::class, 'prosespesan']);
+route::get('/Pembayaran', [KonserController::class, 'tampilbayar']);
+
+// TIKET
+Route::resource('/Dashboard/MyTiket', TiketController::class);
+
+// route::get('/Dashboard/Pembayaran', [KonserController::class, 'indexx']);
 // LOGIN
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'proses']);

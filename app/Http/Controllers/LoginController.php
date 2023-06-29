@@ -26,9 +26,9 @@ class LoginController extends Controller
             $user = User::where('username', $request->username)->first();
 
             if ($user->role == 1) {
-                return redirect()->intended('/Dashboard/Admin');
+                return redirect()->intended('/Dashboard/Konser');
             } else if ($user->role == 2) {
-                return redirect()->intended('/Dashboard/User');
+                return redirect()->intended('/Dashboard/Konser');
             }
         }
         return back();
