@@ -32,11 +32,19 @@
                         <td>{{ $tk->tempat_konser }}</td>
                         <td>{{ $tk->tgl_konser }}</td>
                         <td>
-                            @if ($tk->Status == 'Active')
-                            <span class="badge bg-success text-white">{{ $tk->Status }}</span>
-                            @else
-                            <span class="badge bg-danger text-white">{{ $tk->Status }}</span>
-                            @endif
+                            <div class="d-flex gap-2">
+                                <div class="activenonactive">
+                                    @if ($tk->Status == 'Active')
+                                    <span class="badge bg-success text-white">{{ $tk->Status }}</span>
+                                    @else
+                                    <span class="badge bg-danger text-white">{{ $tk->Status }}</span>
+                                    @endif
+                                </div>
+                                {{-- <div class="detail">
+                                    <a href="/Dashboard/pdf/{{ $tk->id }}" class="btn btn-sm btn-primary">Download
+                                        Tiket</a>
+                                </div> --}}
+                            </div>
                         </td>
                     </tr>
                     @endforeach

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 24 Jun 2023 pada 12.32
+-- Waktu pembuatan: 29 Jun 2023 pada 19.06
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 8.1.6
 
@@ -20,21 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `pemesanan_tiket`
 --
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `dash_admins`
---
-
-CREATE TABLE `dash_admins` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nomor tiket` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -73,9 +58,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (2, '2014_10_12_100000_create_password_reset_tokens_table', 1),
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(5, '2023_06_24_034204_create_dash_admins_table', 1),
-(6, '2023_06_24_041551_create_portals_table', 1),
-(7, '2023_06_24_100107_create_pembayarans_table', 1);
+(5, '2023_06_24_100107_create_pembayarans_table', 1),
+(6, '2023_06_27_152303_create_konsers_table', 1),
+(7, '2023_06_28_134037_create_tikets_table', 1);
 
 -- --------------------------------------------------------
 
@@ -97,8 +82,9 @@ CREATE TABLE `password_reset_tokens` (
 
 CREATE TABLE `pembayarans` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `nama` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tempat` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `User_id` bigint(20) UNSIGNED NOT NULL,
+  `Konser_id` bigint(20) UNSIGNED NOT NULL,
+  `Status_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -125,24 +111,13 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `portals`
---
-
-CREATE TABLE `portals` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Struktur dari tabel `users`
 --
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `role` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nama` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -155,19 +130,13 @@ CREATE TABLE `users` (
 -- Dumping data untuk tabel `users`
 --
 
-INSERT INTO `users` (`id`, `role`, `nama`, `username`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, '1', 'Admin', 'Admin', '$2y$10$OBtGysDDHhUSYsPIfW.F4.OurvRL.4b7.NCLmryVW9gKEbyaVgKP6', NULL, '2023-06-24 03:10:07', '2023-06-24 03:10:07'),
-(2, '2', 'User', 'User', '$2y$10$oXw2xAO3NAdd6cBwbZm6..kIFQ6/okKr52CNLnZZnjmnp6G0sTJyS', NULL, '2023-06-24 03:10:07', '2023-06-24 03:10:07');
+INSERT INTO `users` (`id`, `role`, `image`, `nama`, `username`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, '1', NULL, 'Admin', 'Admin', '$2y$10$TIJdN1R14c94u8HFfh4Ks.qKoh/0cuDwZ6vLcEaxV8BGC/tkVCoJe', NULL, '2023-06-29 08:23:18', '2023-06-29 08:23:18'),
+(2, '2', NULL, 'User', 'User', '$2y$10$dX1jAONbNbpe7GaAi4kxTumgYKgseG7897JmcPkMtR.ZjR9H.UJrS', NULL, '2023-06-29 08:23:41', '2023-06-29 08:23:41');
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indeks untuk tabel `dash_admins`
---
-ALTER TABLE `dash_admins`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeks untuk tabel `failed_jobs`
@@ -203,12 +172,6 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
--- Indeks untuk tabel `portals`
---
-ALTER TABLE `portals`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
@@ -217,12 +180,6 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
-
---
--- AUTO_INCREMENT untuk tabel `dash_admins`
---
-ALTER TABLE `dash_admins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `failed_jobs`
@@ -246,12 +203,6 @@ ALTER TABLE `pembayarans`
 -- AUTO_INCREMENT untuk tabel `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT untuk tabel `portals`
---
-ALTER TABLE `portals`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --

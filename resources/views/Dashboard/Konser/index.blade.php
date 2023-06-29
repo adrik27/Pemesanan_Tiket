@@ -80,7 +80,7 @@
                             <a href="/Dashboard/Konser/{{ $ks->id }}" class="btn btn-sm btn-info">Detail</a>
                         </div>
                         @can('user') <div class="status">
-                            @if ($ks->sisakuota <= 1 ) <button type="button" class="btn btn-sm btn-danger">Kuota
+                            @if ($ks->sisakuota < 1 ) <button type="button" class="btn btn-sm btn-danger">Kuota
                                 Habis</button>
                                 @else
                                 <form action="/Dashboard/Pembayaran" method="Post">

@@ -38,6 +38,7 @@ route::post('/Dashboard/Pembayaran', [KonserController::class, 'prosespesan']);
 route::get('/Pembayaran', [KonserController::class, 'tampilbayar']);
 
 // TIKET
+// Route::get('/Dashboard/pdf/{Tiket:id}', [TiketController::class, 'pdfexport']);
 Route::resource('/Dashboard/MyTiket', TiketController::class);
 
 // route::get('/Dashboard/Pembayaran', [KonserController::class, 'indexx']);

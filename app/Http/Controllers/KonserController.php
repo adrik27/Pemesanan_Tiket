@@ -36,12 +36,10 @@ class KonserController extends Controller
     public function store(Request $request)
     {
         $rule = [
-            'Status_id' => 'required',
             'nama' => 'required',
             'deskripsi' => 'required',
             'harga' => 'required',
             'kuota' => 'required',
-            'sisakuota' => 'required',
             'tempat' => 'required',
             'tanggal' => 'required|date',
         ];
@@ -52,10 +50,10 @@ class KonserController extends Controller
         }
 
         $validatedData['status']    =   'Pesan';
+        $validatedData['sisakuota']    =   $request->kuota;
 
         // Simpan data ke dalam database
         Konser::create($validatedData);
-        // $konser->save();
 
         // Berikan respon atau arahkan ke halaman yang diinginkan
         return redirect('/Dashboard/Konser')->with('success', 'Tambah Data Konser Berhasil Disimpan !');
@@ -76,7 +74,9 @@ class KonserController extends Controller
      */
     public function edit(Konser $Konser)
     {
-        //
+        return view('Dashboard.Konser.edit', [
+            'ks'    =>  $Konser,
+        ]);
     }
 
     /**
@@ -84,7 +84,31 @@ class KonserController extends Controller
      */
     public function update(Request $request, Konser $Konser)
     {
-        //
+        $rule = [
+            // 'Status_id' => 'required',
+            'nama' => 'required',
+            'deskripsi' => 'required',
+            'harga' => 'required',
+            'kuota' => 'required',
+            'sisakuota' => 'required',
+            'tempat' => 'required',
+            'tanggal' => 'required|date',
+        ];
+        $validatedData = $request->validate($rule);
+
+        if ($request->file('image')) {
+            $validatedData['image']    =   $request->file('image')->store('konser-images');
+        }
+
+        $validatedData['status']    =   'Pesan';
+        // $validatedData['sisakuota']    =   $request->kuota;
+
+        // Simpan data ke dalam database
+        Konser::where('id', $Konser->id)
+            ->update($validatedData);
+
+        // Berikan respon atau arahkan ke halaman yang diinginkan
+        return redirect('/Dashboard/Konser')->with('success', 'Update Data Konser Berhasil Disimpan !');
     }
 
     /**
@@ -124,7 +148,11 @@ class KonserController extends Controller
 
         Tiket::create($data);
 
-        Konser::where('id', $request->Konser_id)->decrement('kuota', 1, ['sisakuota' => DB::raw('GREATEST(kuota - 1, 0)')]);
+        $sisakuota = ['sisakuota' => $konser->sisakuota - 1];
+
+        Konser::where('id', $request->Konser_id)
+            ->update($sisakuota);
+
 
         return redirect('/Pembayaran');
     }

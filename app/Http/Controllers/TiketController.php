@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tiket;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class TiketController extends Controller
 {
@@ -64,4 +65,11 @@ class TiketController extends Controller
     {
         //
     }
+
+    // public function pdfexport(Tiket $Tiket)
+    // {
+    //     $data =  $Tiket;
+    //     $pdf = Pdf::loadView('Dashboard.pdf', $data);
+    //     return $pdf->download('tiket.pdf');
+    // }
 }

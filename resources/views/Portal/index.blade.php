@@ -198,9 +198,13 @@
                         </div>
                     </div>
                     <!-- end col -->
-                    <div class="col-lg-6 col-sm-7 col-10 ms-auto order-1 order-lg-1">
+                    <div class="col-lg-6 col-sm-7 ms-auto col-10 order-1 order-lg-1">
                         <div>
+                            @if (!$is->image)
+                            <img src="{{ url('assets/images/demos/hero1.jpg') }}" alt="" class="img-fluid ">
+                            @else
                             <img src="{{ asset('storage/'.$is->image) }}" alt="" class="img-fluid">
+                            @endif
                         </div>
                     </div>
                 </div>
