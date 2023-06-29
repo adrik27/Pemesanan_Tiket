@@ -194,11 +194,7 @@
                     <div class="col-lg-6 order-2 order-lg-2 ">
                         <div class="text-muted">
                             <h1 class="fs-24 text-uppercase text-success">KONSER {{ strtoupper($is->nama) }}</h1>
-                            <p class="mb-4 ff-secondary">Konser musik pop merupakan salah satu jenis konser yang paling
-                                populer di Indonesia. Konser ini biasanya menampilkan
-                                artis dan grup musik pop terkenal baik dari dalam negeri maupun mancanegara. Konser pop
-                                sering kali diadakan di stadion
-                                atau arena besar untuk menampung jumlah penonton yang besar.</p>
+                            <p class="mb-4 ff-secondary">{{strtoupper($is->deskripsi)}}.</p>
                         </div>
                     </div>
                     <!-- end col -->
