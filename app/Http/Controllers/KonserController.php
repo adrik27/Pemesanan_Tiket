@@ -85,7 +85,6 @@ class KonserController extends Controller
     public function update(Request $request, Konser $Konser)
     {
         $rule = [
-            // 'Status_id' => 'required',
             'nama' => 'required',
             'deskripsi' => 'required',
             'harga' => 'required',
