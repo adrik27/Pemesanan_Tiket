@@ -29,7 +29,7 @@ Route::get('/Dashboard/Admin', [DashAdminController::class, 'index']);
 // ADMIN
 Route::resource('/Dashboard/Admin', DashAdminController::class);
 Route::post('/Dashboard/konfirmasi', [DashAdminController::class, 'proseskonfirmasi']);
-Route::resource('/Dashboard/CheckIn', CheckInController::class);
+// Route::resource('/Dashboard/CheckIn', CheckInController::class);
 
 // KONSER
 route::resource('/Dashboard/Konser', KonserController::class);
